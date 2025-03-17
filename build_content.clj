@@ -199,7 +199,7 @@
                     (t-br)
                     (styled-h2 {} "How to Help?")
                     (styled-p {} "The main source of truth for this website is a "
-                              (styled-a {:href ""} "spreadsheet")
+                              (styled-a {:href "https://docs.google.com/spreadsheets/d/1cy2U3JYRbCHj-KI-eszUZH2b5ZKNB5IJ2awiAny2Y8g"} "spreadsheet")
                               ". If you see anything off feel free to reach out to me. If you REALLY want to help, I am open to giving out edit privileges.")
                     (styled-p {} "For people with some coding experience, the website is generated at this "
                               (styled-a {:href "https://github.com/hehk/rungroups"} "repo")
