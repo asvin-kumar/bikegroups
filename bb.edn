@@ -4,8 +4,10 @@
                         :task (shell "bb build_content.clj")}
          build-styles {:doc "Build the css files"
                        :task (do (shell "npx tailwindcss -i styles.css -o dist/styles.css --minify")
-                                 (shell "echo 'DONE: creating styles.css'")
-                                 (shell "bb inline_css.clj"))}
+                                 (println "DONE: creating styles.css")
+                                 (run 'inline-css))}
+         inline-css {:doc "Inline the generated CSS into HTML"
+                     :task (shell "bb inline_css.clj")}        
          build {:doc "Build the website"
                 :task (do (run 'build-content)
                           (run 'build-styles))}
@@ -18,4 +20,4 @@
                 :task (doseq [item (filter (fn [s] (not (.startsWith s "#"))) (fs/read-all-lines ".gitignore"))]
                         (fs/delete-tree item))}
          deploy {:doc "Deploy to Cloudflare Pages"
-                 :task (shell "npx wrangler pages deploy dist --project-name austinrungroups")}}}
+                 :task (shell "npx wrangler pages deploy dist --project-name austinbikegroups")}}}

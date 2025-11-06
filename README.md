@@ -1,6 +1,6 @@
-# Run Groups
+# Bike Groups
 
-This is the source code for the [austinrungroups.com](https://austinrungroups.com) website.
+This is the source code for the [austinbikegroups.com](https://austinbikegroups.com) website.
 
 ## Setting up the environment
 
@@ -17,7 +17,7 @@ bb inline-css
 
 ## Deploying
 
-The website it deployed to Cloudflare Pages, you need access to the `austinrungroups` project. Once you have that, you can deploy with:
+The site deploys to Cloudflare Pages. You will need access to the `austinbikegroups` Cloudflare Pages project used for this site. Once you have access you can deploy with:
 
 ```bash
 bb deploy

@@ -13,3 +13,12 @@ html {
 @view-transition {
   navigation: auto;
 }
+
+/* Ensure links remain visibly underlined in both light and dark themes.
+   Use currentColor so the underline contrasts with the text color in either theme. */
+a {
+  text-decoration-line: underline;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
