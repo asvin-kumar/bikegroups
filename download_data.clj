@@ -49,7 +49,7 @@
 ;; Normalize header row into keywords. Be forgiving about casing/spacing.
 ;; If a header isn't recognized, convert it to a kebab-case keyword.
 (defn meetup-header [header]
-  (let [mappings {"running group" :group
+  (let [mappings {"biking group" :group
                   "day of the week" :day
                   "time" :time
                   "description" :description
@@ -120,7 +120,7 @@
 (def bike-groups-file "data/bike-groups.csv")
 (spit bike-groups-file (safe-get-body (url bike-groups-sheet-id)))
 
-(defn run-group-header [header]
+(defn bike-group-header [header]
   (replace {"Name" :name
             "Description" :description
             "Instagram" :instagram
@@ -145,7 +145,7 @@
 
 (defn get-bike-groups [file]
   (let [data (read-csv-file file)
-        header (run-group-header (first data))
+        header (bike-group-header (first data))
         bike-groups (rest data)]
     (->> bike-groups
          (map #(zipmap header %))

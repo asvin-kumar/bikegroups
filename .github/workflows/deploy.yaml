@@ -23,10 +23,10 @@ jobs:
 
       - name: Build docker image
         run: |
-          docker build -t rungroups:latest .
+          docker build -t bikegroups:latest .
 
       - name: Deploy html
         run: |
           docker run \
           -e CLOUDFLARE_API_TOKEN=${{ env.CLOUDFLARE_API_TOKEN }} \
-          rungroups:latest bb deploy
+          bikegroups:latest bb deploy

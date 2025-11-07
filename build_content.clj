@@ -150,7 +150,7 @@
 
 (def meetups (edn/read-string (slurp "data/meetups.edn")))
 (write-file "index.html"
-            (layout "All of the weekly running events in Austin, Texas"
+            (layout "All of the weekly biking events in Austin, Texas"
                     (day meetups :monday)
                     (day meetups :tuesday)
                     (day meetups :wednesday)
@@ -184,8 +184,8 @@
               :description "The greenbelt is a long trail that starts the the south west corner of Austin, it goes for around 10 miles out and back. It is very well maintained and highly trafficed on the weekends."}])
 
 (write-file "routes.html"
-            (layout "Top running routes in Austin, Texas"
-                    (styled-h2 {} "Long Runs")
+            (layout "Top biking routes in Austin, Texas"
+                    (styled-h2 {} "Long Rides")
                     (apply str (map (fn [r] (t-div {:class "mb-8"}
                                                    (styled-h3 {} (:name r))
                                                    (styled-p {} (:description r))
@@ -202,7 +202,7 @@
                     ;;                                (styled-p {} (str "Location: " (:location r))))) trails))))
 
 (write-file "about.html"
-            (layout "About the austinrungroups.com"
+            (layout "About the austinbikegroups.com"
                     (styled-h2 {} "About")
                     (styled-p {} "This website was created by "
                               (styled-a {:href "https://www.strava.com/athletes/46171421"} "Asvin Kumar") 

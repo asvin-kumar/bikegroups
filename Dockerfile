@@ -1,16 +1,24 @@
-FROM node:18
+FROM node:18-bullseye-slim
 
 WORKDIR /app
 
-RUN curl -sLO https://github.com/babashka/babashka/releases/download/v1.4.192/babashka-1.4.192-linux-amd64-static.tar.gz \
-    && tar -xzf babashka-1.4.192-linux-amd64-static.tar.gz \
-    && mv bb /usr/local/bin/ \
-    && rm babashka-1.4.192-linux-amd64-static.tar.gz
+# Install minimal system packages with security updates, then clean apt caches
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install -y --no-install-recommends ca-certificates curl tar \
+    && rm -rf /var/lib/apt/lists/*
+
+# Download and install babashka (static binary)
+RUN curl -sSL -o /tmp/bb.tar.gz https://github.com/babashka/babashka/releases/download/v1.4.192/babashka-1.4.192-linux-amd64-static.tar.gz \
+    && tar -xzf /tmp/bb.tar.gz -C /tmp \
+    && mv /tmp/bb /usr/local/bin/ \
+    && rm /tmp/bb.tar.gz
 
 # Copy package.json and package-lock.json to leverage Docker cache
 COPY package*.json ./
 
-RUN npm install
+# Use npm ci for reproducible installs and skip audit to avoid network time during build
+RUN npm ci --no-audit --prefer-offline
 
 COPY . .
 
