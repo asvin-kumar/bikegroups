@@ -65,13 +65,19 @@
 (defn layout [description & content]
   (str "<!DOCTYPE html>"
        (t-html {:lang "en"}
-               (t-head {}
-                       (t-meta {:charset "UTF-8"})
-                       (t-meta {:name "viewport" :content "width=device-width, initial-scale=1.0"})
-                       (t-meta {:name "description" :content description})
-                       (t-title {} "austin biking")
-                       (t-link {:rel "icon" :type "image/svg+xml" :href "/bicycle.svg"})
-                       (t-link {:rel "stylesheet" :href "/styles.css"}))
+                (t-head {}
+                        (t-meta {:charset "UTF-8"})
+                        (t-meta {:name "viewport" :content "width=device-width, initial-scale=1.0"})
+                        (t-meta {:name "description" :content description})
+                        (t-meta {:property "og:title" :content "Austin biking"})
+                        (t-meta {:property "og:description" :content description})
+                        (t-meta {:property "og:type" :content "website"})
+                        (t-meta {:name "twitter:card" :content "summary"})
+                        (t-meta {:name "twitter:title" :content "Austin biking"})
+                        (t-meta {:name "twitter:description" :content description})
+                        (t-title {} "austin biking")
+                        (t-link {:rel "icon" :type "image/svg+xml" :href "/bicycle.svg"})
+                        (t-link {:rel "stylesheet" :href "/styles.css"}))
                (t-body {}
                        (header)
                        (apply t-main {:class "container max-w-3xl mx-auto px-4 pb-8"}
@@ -207,7 +213,7 @@
                     (styled-p {} "This website was created by "
                               (styled-a {:href "https://www.strava.com/athletes/46171421"} "Asvin Kumar") 
                               " and is heavily inspired by the "
-                              (styled-a {:href "https://austinrungroups.com"} "Austin Run Groups")
+                              (styled-a {:href "https://austinrungroups.com"} "Austin community groups directory")
                               " website created by "
                               (styled-a {:href "https://www.strava.com/athletes/25975441"} "Kyle Henderson"))
                     (t-br)
