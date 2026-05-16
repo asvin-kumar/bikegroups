@@ -19,7 +19,7 @@
   (fn [attrs & content]
     (apply tag tag-name attrs content)))
 
-(def site-title "Austin biking")
+(def site-title "Austin Biking")
 
 (def t-html (make-tag "html"))
 (def t-meta (make-tag "meta"))
