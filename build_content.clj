@@ -215,7 +215,7 @@
                     (styled-p {} "This website was created by "
                               (styled-a {:href "https://www.strava.com/athletes/46171421"} "Asvin Kumar") 
                               " and is heavily inspired by the "
-                              (styled-a {:href "https://austinrungroups.com"} "Austin community groups directory")
+                              (styled-a {:href "https://austinrungroups.com"} "Austin Run Groups")
                               " website created by "
                               (styled-a {:href "https://www.strava.com/athletes/25975441"} "Kyle Henderson"))
                     (t-br)
