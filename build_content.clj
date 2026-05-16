@@ -19,6 +19,8 @@
   (fn [attrs & content]
     (apply tag tag-name attrs content)))
 
+(def site-title "Austin biking")
+
 (def t-html (make-tag "html"))
 (def t-meta (make-tag "meta"))
 (def t-title (make-tag "title"))
@@ -69,13 +71,13 @@
                         (t-meta {:charset "UTF-8"})
                         (t-meta {:name "viewport" :content "width=device-width, initial-scale=1.0"})
                         (t-meta {:name "description" :content description})
-                        (t-meta {:property "og:title" :content "Austin biking"})
+                        (t-meta {:property "og:title" :content site-title})
                         (t-meta {:property "og:description" :content description})
                         (t-meta {:property "og:type" :content "website"})
                         (t-meta {:name "twitter:card" :content "summary"})
-                        (t-meta {:name "twitter:title" :content "Austin biking"})
+                        (t-meta {:name "twitter:title" :content site-title})
                         (t-meta {:name "twitter:description" :content description})
-                        (t-title {} "austin biking")
+                        (t-title {} site-title)
                         (t-link {:rel "icon" :type "image/svg+xml" :href "/bicycle.svg"})
                         (t-link {:rel "stylesheet" :href "/styles.css"}))
                (t-body {}
