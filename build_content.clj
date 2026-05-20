@@ -19,6 +19,8 @@
   (fn [attrs & content]
     (apply tag tag-name attrs content)))
 
+(def site-title "Austin Biking")
+
 (def t-html (make-tag "html"))
 (def t-meta (make-tag "meta"))
 (def t-title (make-tag "title"))
@@ -65,13 +67,19 @@
 (defn layout [description & content]
   (str "<!DOCTYPE html>"
        (t-html {:lang "en"}
-               (t-head {}
-                       (t-meta {:charset "UTF-8"})
-                       (t-meta {:name "viewport" :content "width=device-width, initial-scale=1.0"})
-                       (t-meta {:name "description" :content description})
-                       (t-title {} "austin biking")
-                       (t-link {:rel "icon" :type "image/svg+xml" :href "/bicycle.svg"})
-                       (t-link {:rel "stylesheet" :href "/styles.css"}))
+                (t-head {}
+                        (t-meta {:charset "UTF-8"})
+                        (t-meta {:name "viewport" :content "width=device-width, initial-scale=1.0"})
+                        (t-meta {:name "description" :content description})
+                        (t-meta {:property "og:title" :content site-title})
+                        (t-meta {:property "og:description" :content description})
+                        (t-meta {:property "og:type" :content "website"})
+                        (t-meta {:name "twitter:card" :content "summary"})
+                        (t-meta {:name "twitter:title" :content site-title})
+                        (t-meta {:name "twitter:description" :content description})
+                        (t-title {} site-title)
+                        (t-link {:rel "icon" :type "image/svg+xml" :href "/bicycle.svg"})
+                        (t-link {:rel "stylesheet" :href "/styles.css"}))
                (t-body {}
                        (header)
                        (apply t-main {:class "container max-w-3xl mx-auto px-4 pb-8"}

@@ -82,7 +82,14 @@
                 hour-24 (cond
                           (= period "AM") (if (= hour-int 12) 0 hour-int)
                           (= period "PM") (if (= hour-int 12) 12 (+ hour-int 12)))]
-            (+ (* hour-24 100) minute-int)))))))
+             (+ (* hour-24 100) minute-int)))))))
+
+(defn normalize-day
+  "Normalize sheet day values like Monday or 1_Monday into :monday."
+  [day-str]
+  (when-let [d (some-> day-str str/trim not-empty str/lower-case)]
+    (let [normalized (or (second (re-matches #"\d+_([a-z]+)" d)) d)]
+      (keyword normalized))))
 
 (defn get-meetups [file]
   (let [data (or (read-csv-file file) [])
@@ -100,14 +107,13 @@
                                    (format "<a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">%s</a>"
                                            loc-url (or loc loc-url))
                                    loc)]
-                    (-> m
-                        (assoc :location location)
-                        (assoc :id (to-id (:group m)))
-                        (assoc :parsed-time (parse-time (:time m)))
-                        (assoc :day (when-let [d (some-> (:day m) str/trim not-empty str/lower-case)]
-                                      (keyword d)))))))
-           (sort-by #(or (:parsed-time %) 9999))
-           vec))))
+                     (-> m
+                         (assoc :location location)
+                         (assoc :id (to-id (:group m)))
+                         (assoc :parsed-time (parse-time (:time m)))
+                         (assoc :day (normalize-day (:day m)))))))
+            (sort-by #(or (:parsed-time %) 9999))
+            vec))))
 
 (def meetups
   (->> meetups-file
