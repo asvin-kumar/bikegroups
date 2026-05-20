@@ -84,8 +84,9 @@
                           (= period "PM") (if (= hour-int 12) 12 (+ hour-int 12)))]
              (+ (* hour-24 100) minute-int)))))))
 
-(defn normalize-day [day-str]
+(defn normalize-day
   "Normalize sheet day values like Monday or 1_Monday into :monday."
+  [day-str]
   (when-let [d (some-> day-str str/trim not-empty str/lower-case)]
     (let [normalized (or (second (re-matches #"\d+_([a-z]+)" d)) d)]
       (keyword normalized))))
